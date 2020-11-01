@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.logging.LogLevel;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
@@ -35,8 +36,8 @@ public class TimeLoggerAspect {
         timeunits.put(TimeUnit.NANOSECONDS, "ns");
     }
 
-//    @Around("@annotation(guru.springframework.services.profiling.Profiling)")
-    @Around("execution(* guru.springframework.repositories.*.*(..))")
+    @Around("@annotation(guru.springframework.services.profiling.Profiling)")
+//    @Around("execution(* guru.springframework.repositories.*.*(..))")
     public Object profile(ProceedingJoinPoint joinPoint) throws Throwable {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         Method method = signature.getMethod();
